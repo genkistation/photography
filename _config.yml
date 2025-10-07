@@ -11,7 +11,7 @@ title:            genkistation
 tagline:          'one frame movies I'
 description:      'one frame movies'
 url:              http://hyde.getpoole.com
-baseurl:          /photography/
+baseurl:          /photography
 
 author:
   name:           'genkistation'
