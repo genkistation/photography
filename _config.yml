@@ -8,14 +8,14 @@ permalink:        pretty
 
 # Setup
 title:            genkistation
-tagline:          'A Jekyll theme'
+tagline:          'one frame movies I'
 description:      'one frame movies'
 url:              http://hyde.getpoole.com
 baseurl:          /photography/
 
 author:
-  name:           'Mark Otto'
-  url:            https://twitter.com/mdo
+  name:           'genkistation'
+  url:            https://genkistation.github.io/
 
 paginate:         5
 
@@ -23,4 +23,4 @@ paginate:         5
 version:          2.1.0
 
 github:
-  repo:           https://github.com/poole/hyde
+  repo:           https://genkistation.github.io/photography
