@@ -23,7 +23,7 @@ order: 3
   /* Galerie de photos */
   .flickr-gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
     gap: 10px;
   }
 
@@ -33,11 +33,11 @@ order: 3
     border-radius: 0 !important; /* supprime les coins arrondis */
     box-shadow: 0 2px 8px rgba(0,0,0,0.15);
     cursor: pointer;
-    transition: transform 0.25s ease;
+    transition: none;
   }
 
   .flickr-gallery img:hover {
-    transform: scale(1.03);
+    transform: none;
   }
 
   /* Lightbox (agrandissement) */
@@ -55,6 +55,7 @@ order: 3
   #lightbox img {
     max-width: 90%;
     max-height: 85%;
+    border-radius: 0 !important;
   }
 
   #prev, #next {
