@@ -31,7 +31,7 @@ order: 3
     width: 100%;
     height: auto;
     border-radius: 0 !important; /* supprime les coins arrondis */
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    box-shadow: none;
     cursor: pointer;
     transition: none;
   }
