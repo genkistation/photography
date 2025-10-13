@@ -73,49 +73,57 @@ order: 3
 </style>
 
 <script>
-  const FLICKR_ID = "203497831@N05"; // Remplace par ton NSID
+  const FLICKR_ID = "203497831@N05"; // ton NSID Flickr
   const url = `https://www.flickr.com/services/feeds/photos_public.gne?id=${FLICKR_ID}&format=json&nojsoncallback=1`;
 
   let photos = [];
   let currentIndex = 0;
 
+  // Proxy plus stable que AllOrigins
   fetch(`https://api.codetabs.com/v1/proxy/?quest=${encodeURIComponent(url)}`)
-    .then(res => res.json())
-    .then(data => {
-      const feed = JSON.parse(data.contents);
-      photos = feed.items.map(item => item.media.m.replace("_m","_b")); // grande version
+    .then(res => res.text())
+    .then(text => {
+      const feed = JSON.parse(text);
+      photos = feed.items.map(item => item.media.m.replace("_m", "_b")); // version HD
       const container = document.getElementById("gallery");
 
       photos.forEach((src, index) => {
         const img = document.createElement("img");
         img.src = src;
-        img.alt = `Photo ${index+1}`;
+        img.alt = `Photo ${index + 1}`;
+        img.loading = "lazy"; // meilleure perf
         img.addEventListener("click", () => openLightbox(index));
         container.appendChild(img);
       });
+    })
+    .catch(err => {
+      console.error("Erreur de chargement Flickr :", err);
+      document.getElementById("gallery").innerHTML =
+        "<p>⚠️ Impossible de charger la galerie pour le moment.</p>";
     });
 
+  // --- Lightbox ---
   const lightbox = document.getElementById("lightbox");
   const lightboxImg = document.getElementById("lightbox-img");
   const prev = document.getElementById("prev");
   const next = document.getElementById("next");
 
-  function openLightbox(index){
+  function openLightbox(index) {
     currentIndex = index;
     lightboxImg.src = photos[currentIndex];
     lightbox.style.display = "flex";
   }
 
-  function closeLightbox(){
+  function closeLightbox() {
     lightbox.style.display = "none";
   }
 
-  function showPrev(){
+  function showPrev() {
     currentIndex = (currentIndex - 1 + photos.length) % photos.length;
     lightboxImg.src = photos[currentIndex];
   }
 
-  function showNext(){
+  function showNext() {
     currentIndex = (currentIndex + 1) % photos.length;
     lightboxImg.src = photos[currentIndex];
   }
@@ -124,12 +132,11 @@ order: 3
   prev.addEventListener("click", showPrev);
   next.addEventListener("click", showNext);
 
-  // Gestion clavier : flèches gauche/droite pour navigation, échap pour fermer
   document.addEventListener("keydown", e => {
-    if(lightbox.style.display === "flex"){
-      if(e.key === "ArrowLeft") showPrev();
-      if(e.key === "ArrowRight") showNext();
-      if(e.key === "Escape") closeLightbox();
+    if (lightbox.style.display === "flex") {
+      if (e.key === "ArrowLeft") showPrev();
+      if (e.key === "ArrowRight") showNext();
+      if (e.key === "Escape") closeLightbox();
     }
   });
 </script>
