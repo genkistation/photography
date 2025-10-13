@@ -79,7 +79,7 @@ order: 3
   let photos = [];
   let currentIndex = 0;
 
-  fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`)
+  fetch(`https://api.codetabs.com/v1/proxy/?quest=${encodeURIComponent(url)}`)
     .then(res => res.json())
     .then(data => {
       const feed = JSON.parse(data.contents);
