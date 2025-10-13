@@ -9,7 +9,7 @@ order: 3
   <h1 class="page-title">Gallery</h1>
   <p>Cliquez sur une photo pour l'agrandir. Utilisez les flèches pour naviguer.</p>
 
-  <div id="gallery"></div>
+  <div id="gallery" class="flickr-gallery"></div>
 </div>
 
 <!-- Overlay pour mode agrandi -->
@@ -20,60 +20,56 @@ order: 3
 </div>
 
 <style>
-  #gallery {
+  /* Galerie de photos */
+  .flickr-gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 15px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 10px;
   }
 
-  #gallery img {
+  .flickr-gallery img {
     width: 100%;
     height: auto;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    border-radius: 0 !important; /* supprime les coins arrondis */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
     cursor: pointer;
-    transition: transform 0.3s ease;
+    transition: transform 0.25s ease;
   }
 
-  /*#gallery img:hover {
-    transform: scale(1.05);
-  } */
+  .flickr-gallery img:hover {
+    transform: scale(1.03);
+  }
 
-  /* Lightbox overlay */
+  /* Lightbox (agrandissement) */
   #lightbox {
     position: fixed;
-    top:0; left:0;
-    width:100%; height:100%;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     background: rgba(0,0,0,0.9);
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
-    z-index: 999;
+    z-index: 9999;
   }
 
   #lightbox img {
     max-width: 90%;
-    max-height: 80%;
-    cursor: pointer;
+    max-height: 85%;
   }
 
   #prev, #next {
-    color: white;
-    font-size: 2rem;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+    color: white;
+    font-size: 2rem;
     cursor: pointer;
-    user-select: none;
-    opacity: 0.7;
-    transition: opacity 0.2s;
+    opacity: 0.8;
   }
 
-  #prev:hover, #next:hover {
-    opacity: 1;
-  }
-
-  #prev { left: 20px; }
-  #next { right: 20px; }
+  #prev:hover, #next:hover { opacity: 1; }
+  #prev { left: 30px; }
+  #next { right: 30px; }
 </style>
 
 <script>
